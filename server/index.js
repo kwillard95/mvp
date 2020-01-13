@@ -14,7 +14,8 @@ app.get("/user", (req, res) => {
 })
 
 app.post("/newuser", (req, res) => {
-  console.log(req.body)
+  Controller.createUser(req, res);
+  console.log(req.body);
 })
 
 app.listen(port, () => console.log(`Boomer\'sBuds listening on port ${port}!`))

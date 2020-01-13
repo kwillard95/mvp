@@ -1,8 +1,5 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fidosfriends', {useNewUrlParser: true});
+const mongoose = require('mongoose');
+const mongoUri = 'mongodb://localhost/fidosfriends';
+const db = mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('DB is connected!')
-})
+module.exports = db;
