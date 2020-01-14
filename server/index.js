@@ -13,6 +13,11 @@ app.get("/user", (req, res) => {
   Controller.findUser(req, res);
 })
 
+app.get("/friendData", (req, res) => {
+  console.log(req.query.park)
+  Controller.findFriends(req, res);
+})
+
 app.post("/newuser", (req, res) => {
   Controller.createUser(req, res);
   console.log(req.body);

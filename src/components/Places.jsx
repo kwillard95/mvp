@@ -41,19 +41,3 @@ export default function Places(props) {
     </PlacesAutoComplete>
   </div>
 }
-
-// class PlacesSearchInput extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { address: ''}
-//   }
-
-//   handleChange = address => {
-//     this.setState({ address });
-//   };
-
-//   handleSelect = address => {
-//     geocodeByAddress(address)
-//     .then(results => getLatLng(results[0]))
-//   }
-// }

@@ -3,9 +3,7 @@ import AppStyle from '../styles/App_Style.js'
 import axios from 'axios';
 import NewUserForm from './NewUserForm.jsx'
 import Dashboard from './Dashboard.jsx'
-// import MapContainer from './GoogleMap.jsx'
-// import MapContainer from './MapboxMap.jsx'
-// import Places from './Places.jsx'
+
 
 
 class App extends React.Component {
