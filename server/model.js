@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   breed: String,
   age: Number,
   gender: String,
-  topDogParks: Array,
+  topParks: Array,
   coordinates: Array
 });
 

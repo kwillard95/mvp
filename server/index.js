@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/user", (req, res) => {
-  console.log(req.query.ID)
+  Controller.findUser(req, res);
 })
 
 app.post("/newuser", (req, res) => {

@@ -10,5 +10,12 @@ module.exports = {
       console.log(user.email + ' saved to users')
       res.send(user.email + ' saved to users')
     })
+  },
+  findUser: (req, res) => {
+    User.findOne({ email: req.query.ID }, (err, user) => {
+      if (err) return console.error(err);
+      console.log(user);
+      res.send(user);
+    })
   }
 }
