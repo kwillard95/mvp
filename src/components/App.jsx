@@ -12,7 +12,8 @@ class App extends React.Component {
     super();
     this.state = {
       email: '',
-      newUser: false,
+      home: true,
+      newUserForm: false
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -27,6 +28,7 @@ class App extends React.Component {
   handleButtonClick(e) {
     e.preventDefault();
     if (e.target.id === 'existing') {
+      this.setState({newUser: false})
       axios.get("/user", {
         params: {
           ID: this.state.email
@@ -39,12 +41,21 @@ class App extends React.Component {
         console.log(error)
       })
     } else {
-      this.setState({newUser: true})
+      this.setState({home: false,
+        newUserForm: true})
     }
   }
 
   form() {
-    if (this.state.newUser === true) {
+    if (this.state.home === true) {
+      return (
+        <div>
+          <button id="new" onClick={this.handleButtonClick}>New User</button>
+          <button id="existing" onClick={this.handleButtonClick}>Existing User</button>
+          <input type="text" placeholder="Email Address" onChange={this.handleInputChange}></input>
+        </div>
+      )
+    } else if (this.state.newUserForm === true) {
       return <NewUserForm email={this.state.email}></NewUserForm>
     }
   }
@@ -52,9 +63,6 @@ class App extends React.Component {
   render() {
     return (
       <AppStyle.Wrapper>
-        <button id="new" onClick={this.handleButtonClick}>New User</button>
-        <button id="existing" onClick={this.handleButtonClick}>Existing User</button>
-        <input type="text" placeholder="Email Address" onChange={this.handleInputChange}></input>
         {this.form()}
       </AppStyle.Wrapper>
     )
