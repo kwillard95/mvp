@@ -13,6 +13,7 @@ class App extends React.Component {
     super();
     this.state = {
       email: '',
+      info: '',
       home: true,
       newUserForm: false,
       dashboard: false
@@ -29,17 +30,18 @@ class App extends React.Component {
   handleButtonClick(e) {
     e.preventDefault();
     if (e.target.id === 'existing') {
-      this.setState({
-        home: false,
-        dashboard: true
-      })
+
       axios.get("/user", {
         params: {
           ID: this.state.email
         }
       })
       .then((response) => {
-        console.log(response)
+        this.setState({
+          home: false,
+          dashboard: true,
+          info: response.data
+        });
       })
       .catch((error) => {
         console.log(error)
@@ -62,7 +64,7 @@ class App extends React.Component {
     } else if (this.state.newUserForm === true) {
       return <NewUserForm email={this.state.email}></NewUserForm>
     } else if (this.state.dashboard === true) {
-      return <Dashboard />
+      return <Dashboard info={this.state.info} />
     }
   }
 

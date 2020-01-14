@@ -10,7 +10,7 @@ class Map extends React.Component {
         height: "50vh",
         latitude: this.props.latlng[0][0],
         longitude: this.props.latlng[0][1],
-        zoom: 10
+        zoom: 8
       },
       parkLocation1: { lat: this.props.latlng[0][0], lng: this.props.latlng[0][1] },
       parkLocation2: { lat: this.props.latlng[1][0], lng: this.props.latlng[1][1] },
@@ -58,8 +58,6 @@ class Map extends React.Component {
               <div>Empty</div>
             )}
         </ReactMapGL>
-        <button onClick={this.setUserLocation}>Set Location</button>
-
       </div>
     )
   }

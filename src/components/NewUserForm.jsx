@@ -54,6 +54,7 @@ class NewUserForm extends React.Component {
       userForm: false,
       dashboard: true
     })
+    console.log('info:', newUserInfo)
     axios({
       method: 'post',
       url: '/newuser',
