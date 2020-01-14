@@ -74,8 +74,13 @@ class NewUserForm extends React.Component {
       <div style={{backgroundColor: '#f5f5f5'}}>
         <UserForm.Form>
           <h3 style={{fontFamily: 'Sans-serif', textAlign: 'center'}}>New User: </h3>
-          Full Name: <UserForm.Input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></UserForm.Input>
+          <div>
+          <div>Full Name:</div> <UserForm.Input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></UserForm.Input>
+          </div>
+          {/* <div>
           City: <UserForm.Input type="text" placeholder="City" name="city" onChange={this.handleChange}></UserForm.Input>
+          </div>
+          <div>
           State: <select name="state" onChange={this.handleChange}>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -129,6 +134,12 @@ class NewUserForm extends React.Component {
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
           </select>
+          </div>
+           */}
+
+
+
+
 
             <div>Pup Information:</div>
             <div><UserForm.Input type="text" placeholder="Pup's Name" name="pupname" onChange={this.handleChange}></UserForm.Input></div>
