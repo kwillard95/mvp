@@ -2,6 +2,7 @@ import React from 'react';
 import MapboxMap from './MapboxMap.jsx';
 import MapboxMapFriends from './MapboxMapFriends.jsx'
 import FriendData from './FriendData.jsx'
+import DBStyle from '../styles/Dashboard_Style.js'
 import axios from 'axios';
 
 class Dashboard extends React.Component {
@@ -49,7 +50,9 @@ class Dashboard extends React.Component {
   friendData() {
     if (this.state.friendData === true) {
       return (
-        <FriendData info={this.props.info} friendInfo={this.state.friendInfo} />
+        <DBStyle.FriendInfo>
+          <FriendData info={this.props.info} friendInfo={this.state.friendInfo} />
+        </DBStyle.FriendInfo>
       )
     }
   }
@@ -68,23 +71,25 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundColor: '#f5f5f5'}}>
         {this.renderMap()}
+        <DBStyle.UserInfo>
+          <div><b>Pup Name:</b> {this.props.info.pupname}</div>
+          <div><b>Breed:</b> {this.props.info.breed}</div>
+          <div><b>Age:</b> {this.props.info.age}</div>
+          <div><b>Gender:</b> {this.props.info.gender}</div>
+
+        </DBStyle.UserInfo>
         <div>
-          <h2>User Information:</h2>
-          <ul style={{ listStyleType: 'none' }}>
-            <li>Pup Name: {this.props.info.pupname}</li>
-            <li>Breed: {this.props.info.breed}</li>
-            <li>Age: {this.props.info.age}</li>
-            <li>Gender: {this.props.info.gender}</li>
-          </ul>
-          {this.props.info.pupname}'s Favorite Parks:
+          <DBStyle.ParkMenu>
+            {this.props.info.pupname}'s Favorite Parks:
             <select onChange={this.handleClick}>
-            <option>Select a park to find {this.props.info.pupname}'s friends!</option>
-            {this.props.info.topParks.map((park) => {
-              return <option value={park}>{park}</option>
-            })}
-          </select>
+              <option>Select a park to find {this.props.info.pupname}'s friends!</option>
+              {this.props.info.topParks.map((park) => {
+                return <option value={park}>{park}</option>
+              })}
+            </select>
+          </DBStyle.ParkMenu>
           {this.friendData()}
         </div>
       </div>
