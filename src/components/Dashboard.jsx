@@ -1,5 +1,6 @@
 import React from 'react';
 import MapboxMap from './MapboxMap.jsx';
+import FriendData from './FriendData.jsx'
 import axios from 'axios';
 
 class Dashboard extends React.Component {
@@ -7,7 +8,8 @@ class Dashboard extends React.Component {
     super(props);
     this.parkRef = React.createRef();
     this.state = {
-      friendData: false
+      friendData: false,
+      friendInfo: ''
     }
     this.handleClick = this.handleClick.bind(this);
   }
@@ -21,8 +23,9 @@ class Dashboard extends React.Component {
       }
     })
     .then((response) => {
-      this.setState({friendData: true});
-      console.log(response)
+      this.setState({friendData: true,
+      friendInfo: response.data});
+      console.log(response.data)
     })
     .catch((error) => {
       console.log(error)
@@ -33,7 +36,7 @@ class Dashboard extends React.Component {
   friendData() {
     if (this.state.friendData === true) {
       return (
-        <FriendData />
+        <FriendData info={this.props.info} friendInfo={this.state.friendInfo} />
       )
     }
   }
