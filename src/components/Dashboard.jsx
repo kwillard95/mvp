@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
   render() {
     return(
       <div>
-        <MapboxMap />
+        <MapboxMap latlng={this.props.info.coordinates} />
       </div>
     )
   }
