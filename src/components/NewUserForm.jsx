@@ -2,6 +2,7 @@ import React from 'react';
 import NewPupForm from './NewPupForm.jsx';
 import Places from './Places.jsx';
 import Dashboard from './Dashboard.jsx'
+import UserForm from '../styles/NewUserForm_Style.js'
 import axios from 'axios';
 
 class NewUserForm extends React.Component {
@@ -70,9 +71,11 @@ class NewUserForm extends React.Component {
   renderPage() {
     if (this.state.userForm === true) {
       return (
-        <form>
-          Full Name: <input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></input>
-          City: <input type="text" placeholder="City" name="city" onChange={this.handleChange}></input>
+      <div style={{backgroundColor: '#f5f5f5'}}>
+        <UserForm.Form>
+          <h3 style={{fontFamily: 'Sans-serif', textAlign: 'center'}}>New User: </h3>
+          Full Name: <UserForm.Input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></UserForm.Input>
+          City: <UserForm.Input type="text" placeholder="City" name="city" onChange={this.handleChange}></UserForm.Input>
           State: <select name="state" onChange={this.handleChange}>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -126,24 +129,26 @@ class NewUserForm extends React.Component {
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
           </select>
-          <form>
-            Pup Information:
-        <input type="text" placeholder="Pup's Name" name="pupname" onChange={this.handleChange}></input>
-            <input type="text" placeholder="Pup's Breed" name="breed" onChange={this.handleChange}></input>
-            <input type="text" placeholder="Pup's Age" name="age" onChange={this.handleChange}></input>
+
+            <div>Pup Information:</div>
+            <div><UserForm.Input type="text" placeholder="Pup's Name" name="pupname" onChange={this.handleChange}></UserForm.Input></div>
+            <div><UserForm.Input type="text" placeholder="Pup's Breed" name="breed" onChange={this.handleChange}></UserForm.Input></div>
+            <div><UserForm.Input type="text" placeholder="Pup's Age" name="age" onChange={this.handleChange}></UserForm.Input></div>
+
             <select name="gender" onChange={this.handleChange}>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-          </form>
-          <form>
-          <div>Choose Your Top 3 Most Frequently Visited Dog Parks:</div>
+          <div>Top 3 Most Frequently Visited Dog Parks:</div>
+          <div style={{padding: '10px'}}>
           Park 1: <Places topDogParks={this.topDogParks}/>
           Park 2: <Places topDogParks={this.topDogParks}/>
           Park 3: <Places topDogParks={this.topDogParks}/>
-          </form>
+          </div>
+
           <button onClick={this.handleSubmit}>Submit Info</button>
-        </form>
+        </UserForm.Form>
+      </div>
       )
     } else {
       return <Dashboard info={this.state}/>

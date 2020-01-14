@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   handleInputChange(e) {
-    this.setState({email: e.target.value})
+    this.setState({ email: e.target.value })
   }
 
   handleButtonClick(e) {
@@ -34,29 +34,32 @@ class App extends React.Component {
           ID: this.state.email
         }
       })
-      .then((response) => {
-        this.setState({
-          home: false,
-          dashboard: true,
-          info: response.data
-        });
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+        .then((response) => {
+          this.setState({
+            home: false,
+            dashboard: true,
+            info: response.data
+          });
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     } else {
-      this.setState({home: false,
-        newUserForm: true})
+      this.setState({
+        home: false,
+        newUserForm: true
+      })
     }
   }
 
   form() {
     if (this.state.home === true) {
       return (
-        <div>
-          <button id="new" onClick={this.handleButtonClick}>New User</button>
-          <button id="existing" onClick={this.handleButtonClick}>Existing User</button>
-          <input type="text" placeholder="Email Address" onChange={this.handleInputChange}></input>
+        <div style={{ top: '40%', left: '40%', position: 'fixed' }}>
+          <div><AppStyle.Input type="text" placeholder="Email Address" onChange={this.handleInputChange}></AppStyle.Input></div>
+          <AppStyle.Button id="new" onClick={this.handleButtonClick}>New User</AppStyle.Button>
+          <AppStyle.Button id="existing" onClick={this.handleButtonClick}>Existing User</AppStyle.Button>
+
         </div>
       )
     } else if (this.state.newUserForm === true) {
@@ -69,6 +72,7 @@ class App extends React.Component {
   render() {
     return (
       <AppStyle.Wrapper>
+        <AppStyle.Logo><img src="./locMarker.png" /> find fido's friends <img src="./locMarker.png" /></AppStyle.Logo>
         {this.form()}
       </AppStyle.Wrapper>
     )
