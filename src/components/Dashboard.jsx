@@ -1,5 +1,6 @@
 import React from 'react';
 import MapboxMap from './MapboxMap.jsx';
+import MapboxMapFriends from './MapboxMapFriends.jsx'
 import FriendData from './FriendData.jsx'
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ class Dashboard extends React.Component {
     this.parkRef = React.createRef();
     this.state = {
       friendData: false,
+      friendMap: false,
       friendInfo: ''
     }
     this.handleClick = this.handleClick.bind(this);
@@ -17,19 +19,30 @@ class Dashboard extends React.Component {
   handleClick(e) {
     e.preventDefault();
     console.log(e.target.value)
+    if (e.target.value === `Select a park to find ${this.props.info.pupname}'s friends!`) {
+      this.setState({ friendData: false, friendMap: false })
+    }
     axios.get('/friendData', {
       params: {
         park: e.target.value
       }
     })
-    .then((response) => {
-      this.setState({friendData: true,
-      friendInfo: response.data});
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      .then((response) => {
+        if (response.data.length > 1) {
+          this.setState({
+            friendData: true,
+            friendMap: true,
+            friendInfo: response.data
+          });
+        } else {
+          this.setState({ friendData: false, friendMap: false })
+        }
+
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
   }
 
@@ -41,10 +54,22 @@ class Dashboard extends React.Component {
     }
   }
 
+  renderMap() {
+    if (this.state.friendMap === false) {
+      return (
+        <MapboxMap latlng={this.props.info.coordinates} />
+      )
+    } else {
+      return (
+        <MapboxMapFriends latlng={this.props.info.coordinates} friends={this.state.friendInfo} />
+      )
+    }
+  }
+
   render() {
     return (
       <div>
-        <MapboxMap latlng={this.props.info.coordinates} />
+        {this.renderMap()}
         <div>
           <h2>User Information:</h2>
           <ul style={{ listStyleType: 'none' }}>
@@ -55,10 +80,10 @@ class Dashboard extends React.Component {
           </ul>
           {this.props.info.pupname}'s Favorite Parks:
             <select onChange={this.handleClick}>
-              <option>Select a park to find {this.props.info.pupname}'s friends!</option>
-              {this.props.info.topParks.map((park) => {
-                return <option value={park}>{park}</option>
-              })}
+            <option>Select a park to find {this.props.info.pupname}'s friends!</option>
+            {this.props.info.topParks.map((park) => {
+              return <option value={park}>{park}</option>
+            })}
           </select>
           {this.friendData()}
         </div>

@@ -13,11 +13,14 @@ class FriendData extends React.Component {
         {this.props.friendInfo.map((friend) => {
           if (friend.email !== this.props.info.email) {
             return (
-              <ul>
+              <ul style={{ listStyleType: 'none' }}>
                 <li>Name: {friend.pupname}</li>
                 <li>Breed: {friend.breed}</li>
                 <li>Age: {friend.age}</li>
-                <li>Gender: {friend.pupname}</li>
+                <li>Gender: {friend.gender}</li>
+                <li>Favorite Parks: {friend.topParks.map((park) => {
+                  return <div>{park}</div>
+                })}</li>
               </ul>
         )}})}
 
