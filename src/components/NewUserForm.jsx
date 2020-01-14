@@ -26,7 +26,6 @@ class NewUserForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.topDogParks = this.topDogParks.bind(this);
-    // this.submitInfo = this.submitInfo.bind(this);
   }
 
   topDogParks(park, coordinates) {

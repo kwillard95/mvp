@@ -17,5 +17,12 @@ module.exports = {
       console.log(user);
       res.send(user);
     })
+  },
+  findFriends: (req, res) => {
+    User.find({topParks: req.query.park}, (err, user) => {
+      if (err) return console.error(err);
+      console.log(user);
+      res.send(user);
+    })
   }
 }
