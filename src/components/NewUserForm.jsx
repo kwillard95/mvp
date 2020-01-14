@@ -1,5 +1,6 @@
 import React from 'react';
 import NewPupForm from './NewPupForm.jsx';
+import Places from './Places.jsx'
 import axios from 'axios';
 
 class NewUserForm extends React.Component {
@@ -13,37 +14,49 @@ class NewUserForm extends React.Component {
       pupname: '',
       breed: '',
       age: '',
-      gender: 'male'
+      gender: 'male',
+      topParks: [],
+      coordinates: []
     }
 
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.topDogParks = this.topDogParks.bind(this);
     // this.submitInfo = this.submitInfo.bind(this);
+  }
+
+  topDogParks(park, coordinates) {
+    var parks = this.state.topParks;
+    var latlng = this.state.coordinates;
+    parks.push(park);
+    latlng.push(coordinates)
+    this.setState({
+      topParks: parks,
+      coordinates: latlng
+    });
   }
 
   handleChange(e) {
     const { value, name } = e.target
     this.setState({ [name]: value });
-    console.log(this.state)
   }
 
   handleSubmit(e) {
     e.preventDefault();
     var newUserInfo = this.state;
     console.log(newUserInfo)
-    axios({
-      method: 'post',
-      url: '/newuser',
-      data: newUserInfo
-    })
-      .then((response) => {
-        console.log("Successfully posted!")
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
+    // axios({
+    //   method: 'post',
+    //   url: '/newuser',
+    //   data: newUserInfo
+    // })
+    //   .then((response) => {
+    //     console.log("Successfully posted!")
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 
 
@@ -115,7 +128,12 @@ class NewUserForm extends React.Component {
             <option value="female">Female</option>
           </select>
         </form>
-        {/* <button onSubmit={this.handleSubmit}>Add Another Pup</button> */}
+        <form>
+        <div>Choose Your Top 3 Most Frequently Visited Dog Parks:</div>
+        Park 1: <Places topDogParks={this.topDogParks}/>
+        Park 2: <Places topDogParks={this.topDogParks}/>
+        Park 3: <Places topDogParks={this.topDogParks}/>
+        </form>
         <button onClick={this.handleSubmit}>Submit Info</button>
       </form>
     )
