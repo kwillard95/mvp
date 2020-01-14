@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
   breed: String,
   age: Number,
   gender: String,
-  topDogParks: String
+  topDogParks: Array,
+  coordinates: Array
 });
 
 var User = mongoose.model('User', userSchema);

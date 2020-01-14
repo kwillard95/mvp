@@ -2,6 +2,7 @@ import React from 'react'
 import AppStyle from '../styles/App_Style.js'
 import axios from 'axios';
 import NewUserForm from './NewUserForm.jsx'
+import Dashboard from './Dashboard.jsx'
 // import MapContainer from './GoogleMap.jsx'
 // import MapContainer from './MapboxMap.jsx'
 // import Places from './Places.jsx'
@@ -13,7 +14,8 @@ class App extends React.Component {
     this.state = {
       email: '',
       home: true,
-      newUserForm: false
+      newUserForm: false,
+      dashboard: false
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -22,13 +24,15 @@ class App extends React.Component {
 
   handleInputChange(e) {
     this.setState({email: e.target.value})
-    console.log(this.state.email)
   }
 
   handleButtonClick(e) {
     e.preventDefault();
     if (e.target.id === 'existing') {
-      this.setState({newUser: false})
+      this.setState({
+        home: false,
+        dashboard: true
+      })
       axios.get("/user", {
         params: {
           ID: this.state.email
@@ -57,6 +61,8 @@ class App extends React.Component {
       )
     } else if (this.state.newUserForm === true) {
       return <NewUserForm email={this.state.email}></NewUserForm>
+    } else if (this.state.dashboard === true) {
+      return <Dashboard />
     }
   }
 
