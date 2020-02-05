@@ -1,2 +1,2 @@
-# mvp
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on individually.
+# Find Fido's Friends
+This application is designed to help you discover new dog parks and help you and your pup finds new friends! Utilizing Google Place API to pinpoint your top three dog parks, this application will find other users that go to the same dog parks as you and will show their top three dog parks of choice! I used the MapBox API to display exact points of the targeted dog parks on a map. Eventually, this application will have messaging and scheduling functionaltiies, so that you can coordinate the best times to go to the dog park while other dogs are there. 
